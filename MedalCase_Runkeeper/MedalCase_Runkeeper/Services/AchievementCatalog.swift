@@ -27,6 +27,6 @@ enum AchievementCatalog {
         Achievement(nameKey: "achievement_hakone_ekiden", value: "00:00:00", imageName: "hakone_ekiden", isVirtualRace: true),
         Achievement(nameKey: "achievement_singapore_ekiden", value: "00:00:00", imageName: "mizuno_singapore_ekiden", isVirtualRace: true),
         Achievement(nameKey: "achievement_virtual_5k", value: "23:07", imageName: "virtual_5k_race", isVirtualRace: true),
-        Achievement(nameKey: "achievement_virtual_10k", value: "00:00:00", imageName: "virtual_marathon_race", isVirtualRace: true)
+        Achievement(nameKey: "achievement_virtual_marathon_race", value: nil, imageName: "virtual_marathon_race", isVirtualRace: true)
     ]
 }

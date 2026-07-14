@@ -205,6 +205,23 @@
         }
       }
     },
+    "achievement_virtual_marathon_race" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Virtual Marathon"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marathon Virtuelle"
+          }
+        }
+      }
+    },
     "achievements_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -306,8 +323,21 @@
         }
       }
     },
-    "Hello, world!" : {
-
+    "error_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something went wrong"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une erreur est survenue"
+          }
+        }
+      }
     },
     "help_faq_button" : {
       "extractionState" : "manual",
@@ -322,6 +352,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aide & FAQ"
+          }
+        }
+      }
+    },
+    "Loading Achievements" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading Achievements"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "chargement des réalisations"
           }
         }
       }
@@ -611,23 +657,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Voir les Trophées"
-          }
-        }
-      }
-    },
-    "virtual_marathon_race" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Marathon"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Marathon"
           }
         }
       }
