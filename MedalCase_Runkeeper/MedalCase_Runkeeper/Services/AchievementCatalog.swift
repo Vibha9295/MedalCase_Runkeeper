@@ -7,9 +7,7 @@
 
 // MARK: - Sample Data
 
-/// Mock catalog used by `DefaultAchievementService`. Separated from the
-/// service itself so it can be reused in SwiftUI previews and tests without
-/// pulling in networking/async concerns.
+/// Mock catalog used by DefaultAchievementService. Separated from the service itself so it can be reused in SwiftUI previews and tests without pulling in networking/async concerns.
 enum AchievementCatalog {
     static let personalRecords: [Achievement] = [
         Achievement(nameKey: "achievement_longest_run", value: "00:00", imageName: "longest_run", isVirtualRace: false),

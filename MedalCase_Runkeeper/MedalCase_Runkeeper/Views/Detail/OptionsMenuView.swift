@@ -22,12 +22,13 @@ struct OptionsMenuView: View {
                     .padding(.horizontal, 24)
                     .padding(.top, 24)
                     .padding(.bottom, 12)
+                    .accessibilityIdentifier("options_menu_title")
 
                 VStack(spacing: 0) {
                     ShareLink(item: String(localized: "share_all_records_summary \(personalRecordsProgress)")) {
                         optionRow(systemImage: "square.and.arrow.up", titleKey: "share_summary_button")
                     }
-
+                    .accessibilityIdentifier("share_summary_button")
                     Divider()
                         .padding(.horizontal, 24)
 
@@ -37,6 +38,7 @@ struct OptionsMenuView: View {
                     } label: {
                         optionRow(systemImage: "questionmark.circle", titleKey: "help_faq_button")
                     }
+                    .accessibilityIdentifier("help_faq_button")
                 }
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(14)
@@ -54,12 +56,13 @@ struct OptionsMenuView: View {
                     .fontWeight(.bold)
                     .foregroundStyle(Color.brandTeal)
                     .padding(.trailing, 0)
+                    .accessibilityIdentifier("navigation_done")
                 }
             }
         }
     }
 
-    /// Shared row layout for both menu actions, avoiding a duplicated HStack.
+    // Shared row layout for both menu actions, avoiding a duplicated HStack.
     private func optionRow(systemImage: String, titleKey: LocalizedStringKey) -> some View {
         HStack(spacing: 12) {
             Image(systemName: systemImage)

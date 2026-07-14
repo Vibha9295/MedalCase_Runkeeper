@@ -42,9 +42,9 @@ final class AchievementsViewModel {
     }
 
     /// Loads or refreshes data intelligently:
-    /// - No cached data yet → full-screen loading state.
+    /// - No cached data yet -> full-screen loading state.
     /// - Cached data is fresh and `forceRefresh` is false → no-op.
-    /// - Otherwise → silent background refresh, preserving what's on screen.
+    /// - Otherwise -> silent background refresh, preserving what's on screen.
     func loadData(forceRefresh: Bool = false) async {
         if case .loaded = uiState {
             guard forceRefresh || !isCacheFresh else { return }

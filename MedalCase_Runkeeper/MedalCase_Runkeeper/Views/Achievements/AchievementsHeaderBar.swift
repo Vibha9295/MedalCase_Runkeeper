@@ -26,6 +26,7 @@ struct AchievementsHeaderBar: View {
                         .padding(.vertical, 8)
                 }
                 .accessibilityLabel("back_button")
+                .accessibilityIdentifier("back_button")
 
                 Spacer()
 
@@ -33,11 +34,14 @@ struct AchievementsHeaderBar: View {
                     Text("achievements_title")
                         .font(.system(size: 18, weight: .bold))
                         .foregroundStyle(.white)
+                        .accessibilityIdentifier("achievements_title")
 
                     if isRefreshing {
                         ProgressView()
                             .tint(.white)
                             .scaleEffect(0.8)
+                            .accessibilityIdentifier("achievements_refresh_indicator") 
+
                     }
                 }
 
@@ -52,6 +56,7 @@ struct AchievementsHeaderBar: View {
                         .padding(.vertical, 8)
                 }
                 .accessibilityLabel("options_section_header")
+                .accessibilityIdentifier("options_section_header") 
             }
             .padding(.bottom, 10)
         }

@@ -18,12 +18,14 @@ struct AchievementsListView: View {
             VStack(spacing: 0) {
                 AchievementSectionGrid(
                     titleKey: "section_personal_records",
+                    identifier: "section_personal_records",
                     trailingContent: personalRecordsProgress,
                     achievements: personalRecords
                 )
 
                 AchievementSectionGrid(
                     titleKey: "section_virtual_races",
+                    identifier: "section_virtual_races", 
                     trailingContent: "",
                     achievements: virtualRaces
                 )

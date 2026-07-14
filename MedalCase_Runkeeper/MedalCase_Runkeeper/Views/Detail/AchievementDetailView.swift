@@ -41,17 +41,25 @@ struct AchievementDetailView: View {
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.horizontal, 24)
+                .accessibilityIdentifier("achievement_detail_name")
 
             if let value = achievement.value {
                 Text("record_value_display \(value)")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundStyle(Color.brandTeal)
+                    .accessibilityIdentifier("achievement_detail_value")
+
             } else {
                 Text("not_yet_earned_detail")
                     .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(.secondary)
+                    .accessibilityIdentifier("achievement_detail_not_earned")
+
             }
         }
+        .accessibilityIdentifier(
+            achievement.value != nil ? "achievement_detail_value" : "achievement_detail_locked_text"
+        )
     }
 
     private var statusCard: some View {
@@ -62,6 +70,7 @@ struct AchievementDetailView: View {
                     .accessibilityHidden(true)
                 Text(achievement.isUnlocked ? "status_earned" : "status_locked")
                     .font(.headline)
+                    .accessibilityIdentifier("achievement_status_text")
             }
 
             Text(achievement.isVirtualRace ? "description_virtual_race" : "description_personal_record")
@@ -73,6 +82,8 @@ struct AchievementDetailView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.secondarySystemBackground), in: RoundedRectangle(cornerRadius: Layout.cardCornerRadius))
         .padding(.horizontal, Layout.screenHorizontalPadding)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("achievement_detail_status_card")
     }
 
     @ViewBuilder
@@ -89,6 +100,7 @@ struct AchievementDetailView: View {
                 .frame(height: Layout.secondaryButtonHeight)
                 .background(Color.brandTeal, in: RoundedRectangle(cornerRadius: 12))
             }
+            .accessibilityIdentifier("share_progress_button")
             .padding(.horizontal, Layout.screenHorizontalPadding)
             .padding(.bottom, 32)
         } else {
@@ -102,6 +114,7 @@ struct AchievementDetailView: View {
                     .frame(height: Layout.secondaryButtonHeight)
                     .background(Color.brandTeal.opacity(0.1), in: RoundedRectangle(cornerRadius: 12))
             }
+            .accessibilityIdentifier("achievement_detail_back_button")
             .padding(.horizontal, Layout.screenHorizontalPadding)
             .padding(.bottom, 32)
         }

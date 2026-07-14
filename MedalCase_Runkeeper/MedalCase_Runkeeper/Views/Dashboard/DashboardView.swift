@@ -23,12 +23,15 @@ struct DashboardView: View {
                 Text("welcome_title")
                     .font(.system(size: 24, weight: .bold))
                     .foregroundStyle(.primary)
+                    .accessibilityIdentifier("welcome_title")
 
                 Text("welcome_subtitle")
                     .font(.system(size: 16))
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 32)
+                    .accessibilityIdentifier("welcome_subtitle") 
+
             }
 
             Spacer()
@@ -46,6 +49,7 @@ struct DashboardView: View {
                 .background(Color.brandTeal, in: RoundedRectangle(cornerRadius: Layout.primaryButtonHeight / 2))
                 .padding(.horizontal, Layout.screenHorizontalPadding)
             }
+            .accessibilityIdentifier("view_achievements_button") 
             .padding(.bottom, 32)
         }
         .navigationTitle("dashboard_title")

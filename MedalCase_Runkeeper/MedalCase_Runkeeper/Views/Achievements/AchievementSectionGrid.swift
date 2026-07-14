@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AchievementSectionGrid: View {
     let titleKey: LocalizedStringKey
+    let identifier: String
     let trailingContent: String
     let achievements: [Achievement]
 
@@ -18,7 +19,7 @@ struct AchievementSectionGrid: View {
     ]
 
     var body: some View {
-        SectionHeaderView(titleKey: titleKey, trailingContent: trailingContent)
+        SectionHeaderView(titleKey: titleKey, identifier: identifier, trailingContent: trailingContent)
 
         LazyVGrid(columns: columns, spacing: 20) {
             ForEach(achievements) { achievement in
@@ -26,6 +27,7 @@ struct AchievementSectionGrid: View {
                     MedalCellView(achievement: achievement)
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier(achievement.nameKey)
             }
         }
         .padding(.horizontal, 24)

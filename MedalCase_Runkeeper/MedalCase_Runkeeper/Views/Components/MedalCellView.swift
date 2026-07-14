@@ -29,6 +29,8 @@ struct MedalCellView: View {
                 Text(achievement.isUnlocked ? (achievement.value ?? "") : String(localized: "not_yet_earned_cell"))
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(achievement.isUnlocked ? .secondary : .secondary.opacity(0.3))
+                    .accessibilityIdentifier("medal_cell_value") 
+
             }
         }
         .padding(.vertical, 8)
