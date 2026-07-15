@@ -41,10 +41,6 @@ final class AchievementsViewModel {
         return clock.now - lastFetchedInstant < cacheLifetime
     }
 
-    /// Loads or refreshes data intelligently:
-    /// - No cached data yet -> full-screen loading state.
-    /// - Cached data is fresh and `forceRefresh` is false → no-op.
-    /// - Otherwise -> silent background refresh, preserving what's on screen.
     func loadData(forceRefresh: Bool = false) async {
         if case .loaded = uiState {
             guard forceRefresh || !isCacheFresh else { return }
@@ -72,6 +68,7 @@ final class AchievementsViewModel {
             let feed = try await service.fetchAchievements()
             apply(feed)
         } catch {
+            // Background network dropouts are swallowed to avoid interrupting visible views
         }
     }
 

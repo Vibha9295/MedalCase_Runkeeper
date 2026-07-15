@@ -7,8 +7,8 @@
 
 import Foundation
 
-/// A single running achievement — either a personal record or a completed virtual race. value == nil means the achievement hasn't been earned yet.
-struct Achievement: Identifiable, Hashable, Sendable {
+/// A single running achievement — either a personal record or a completed virtual race.
+nonisolated struct Achievement: Identifiable, Hashable, Sendable {
     let id: UUID
     let nameKey: String
     let value: String?
@@ -38,7 +38,7 @@ struct Achievement: Identifiable, Hashable, Sendable {
 // MARK: - Sharing
 
 extension Achievement {
-    // Share-sheet text for a single achievement. Lives here (rather than in the view) so it's unit-testable and reusable.
+    // Share-sheet text for a single achievement.
     var shareSummary: String {
         String(localized: "share_individual_achievement_summary \(localizedName) \(value ?? "")")
     }

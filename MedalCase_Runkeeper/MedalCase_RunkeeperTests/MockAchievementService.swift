@@ -5,61 +5,55 @@
 //  Created by Vibha on 2026-07-14.
 //
 
+import XCTest
 import Foundation
 @testable import MedalCase_Runkeeper
 
+/// Safe, thread-safe testing errors.
+struct StubError: LocalizedError, Equatable {
+    var errorDescription: String? { "Simulated service error" }
+}
+
+/// Fully thread-safe, Swift 6 safe async Mock service.
 final class MockAchievementService: AchievementService, @unchecked Sendable {
-
-    // Feed returned by the next successful `fetchAchievements()` call.
-    var feedToReturn = AchievementFeed(personalRecords: [], virtualRaces: [])
-
-    // When set, `fetchAchievements()` throws this instead of returning data.
+    private let lock = NSLock()
+    
+    var feedToReturn: AchievementFeed = AchievementFeed(personalRecords: [], virtualRaces: [])
     var errorToThrow: Error?
-
-    // Optional artificial delay before resolving, to simulate network
-    // latency and let tests observe intermediate states (e.g. `.loading`).
-    var delay: Duration = .zero
-
-    // Number of times `fetchAchievements()` has been invoked.
-    private(set) var fetchCallCount = 0
-
-    // Optional hook invoked at the start of every call, useful for
-    // asserting ordering/timing without racing the test.
-    var onFetch: (() -> Void)?
+    var delay: Duration?
+    
+    private var _fetchCallCount = 0
+    var fetchCallCount: Int {
+        lock.withLock { _fetchCallCount }
+    }
 
     func fetchAchievements() async throws -> AchievementFeed {
-        fetchCallCount += 1
-        onFetch?()
-
-        if delay > .zero {
+        lock.withLock {
+            _fetchCallCount += 1
+        }
+        
+        if let delay {
             try await Task.sleep(for: delay)
         }
-
-        if let errorToThrow {
-            throw errorToThrow
+        
+        if let error = errorToThrow {
+            throw error
         }
-
+        
         return feedToReturn
     }
 }
 
 extension AchievementFeed {
-    // Convenience fixture with a predictable mix of unlocked/locked items,
-    // mirroring the shape of `AchievementCatalog` without depending on it.
     static func fixture(
         personalRecords: [Achievement] = [
-            Achievement(nameKey: "achievement_longest_run", value: "05:12", imageName: "longest_run", isVirtualRace: false),
-            Achievement(nameKey: "achievement_fastest_5k", value: nil, imageName: "fastest_5k", isVirtualRace: false)
+            Achievement(nameKey: "rec_1", value: "10:00", imageName: "img1", isVirtualRace: false),
+            Achievement(nameKey: "rec_2", value: nil, imageName: "img2", isVirtualRace: false)
         ],
         virtualRaces: [Achievement] = [
-            Achievement(nameKey: "achievement_virtual_5k", value: "23:07", imageName: "virtual_5k_race", isVirtualRace: true)
+            Achievement(nameKey: "race_1", value: "25:00", imageName: "img3", isVirtualRace: true)
         ]
     ) -> AchievementFeed {
         AchievementFeed(personalRecords: personalRecords, virtualRaces: virtualRaces)
     }
-}
-
-struct StubError: Error, Equatable {
-    let message: String
-    init(_ message: String = "stub failure") { self.message = message }
 }

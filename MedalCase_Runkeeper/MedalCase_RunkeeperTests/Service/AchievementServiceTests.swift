@@ -8,7 +8,10 @@
 import XCTest
 @testable import MedalCase_Runkeeper
 
+@MainActor
 final class AchievementServiceTests: XCTestCase {
+
+    // MARK: - Achievement Service Tests
 
     func test_defaultService_returnsCatalogData() async throws {
         let service = DefaultAchievementService()
@@ -32,7 +35,7 @@ final class AchievementServiceTests: XCTestCase {
         XCTAssertEqual(error.errorDescription, String(localized: "error_subtitle"))
     }
 
-    // MARK: - Mock-based contract tests
+    // MARK: - Mock-Based Contract Tests
 
     func test_mockService_returnsInjectedFeed() async throws {
         let mock = MockAchievementService()
@@ -47,20 +50,22 @@ final class AchievementServiceTests: XCTestCase {
 
     func test_mockService_throwsInjectedError() async {
         let mock = MockAchievementService()
-        mock.errorToThrow = StubError()
+        let expectedError = StubError()
+        mock.errorToThrow = expectedError
 
         do {
             _ = try await mock.fetchAchievements()
-            XCTFail("Expected fetchAchievements to throw")
+            XCTFail("Expected fetchAchievements to throw, but it succeeded")
         } catch let error as StubError {
-            XCTAssertEqual(error, StubError())
+            XCTAssertEqual(error, expectedError)
         } catch {
-            XCTFail("Unexpected error type: \(error)")
+            XCTFail("Unexpected error type thrown: \(error)")
         }
     }
 
     func test_mockService_tracksCallCountAcrossMultipleFetches() async throws {
         let mock = MockAchievementService()
+        
         _ = try await mock.fetchAchievements()
         _ = try await mock.fetchAchievements()
         _ = try await mock.fetchAchievements()

@@ -12,7 +12,7 @@ extension Color {
     static let brandTeal = Color(red: 0.21, green: 0.73, blue: 0.82)
 }
 
-// Layout constants shared by multiple screens. Keeping these in one place
+// Layout constants shared by multiple screens. 
 enum Layout {
     static let screenHorizontalPadding: CGFloat = 24
     static let cardCornerRadius: CGFloat = 16

@@ -62,7 +62,6 @@ struct OptionsMenuView: View {
         }
     }
 
-    // Shared row layout for both menu actions, avoiding a duplicated HStack.
     private func optionRow(systemImage: String, titleKey: LocalizedStringKey) -> some View {
         HStack(spacing: 12) {
             Image(systemName: systemImage)
